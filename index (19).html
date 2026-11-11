@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="uz-Cyrl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Янгилаш талаб қилинади</title>
+  <style>
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      overflow: hidden;
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100dvh;
+      background: #000;
+      position: relative;
+      padding: 0 14px 18px;
+      overflow: hidden;
+    }
+
+    .top-line-wrap {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding-top: 10px;
+      z-index: 3;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.92), rgba(0,0,0,0.55), rgba(0,0,0,0));
+    }
+
+    .top-line {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .top-line-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: #42b9ff;
+      transition: width 3.2s cubic-bezier(0.18, 0.65, 0.45, 1), background-color 0.35s ease;
+    }
+
+    .loader-zone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 28px;
+      min-height: 112px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 3px solid #252525;
+      border-top-color: #42b9ff;
+      transition: border-top-color 0.35s ease;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .update-text {
+      margin-top: 14px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ff7b86;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      text-align: center;
+    }
+
+    .update-text.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .subtext {
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      max-width: 290px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .subtext.show { opacity: 1; }
+
+    .grid {
+      margin-top: 4px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding-bottom: 10px;
+    }
+
+    .photo-card {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #1a1a1a;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: blur(4px) brightness(0.88);
+      transform: scale(1.06);
+    }
+
+    .photo-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(0,0,0,0.14));
+      pointer-events: none;
+    }
+
+    @media (max-width: 360px) {
+      .app { padding: 0 10px 16px; }
+      .loader-zone { padding-top: 24px; min-height: 104px; }
+      .update-text { font-size: 17px; }
+      .subtext { font-size: 13px; }
+      .grid { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="top-line-wrap">
+      <div class="top-line">
+        <div class="top-line-bar" id="lineBar"></div>
+      </div>
+    </div>
+
+    <section class="loader-zone">
+      <div class="spinner" id="spinner" aria-label="Юкланмоқда"></div>
+      <div class="update-text" id="updateText">Янгилаш талаб қилинади</div>
+      <div class="subtext" id="subText">Фотоларни кўриш учун илованинг янги версиясини ўрнатинг.</div>
+    </section>
+
+    <section class="grid" aria-label="Свадьба фотолари">
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Свадьба сурати" /></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Свадьба сурати" /></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=900&q=80" alt="Свадьба сурати" /></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80" alt="Свадьба сурати" /></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=900&q=80" alt="Свадьба сурати" /></div>
+      <div class="photo-card"><img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=900&q=80" alt="Свадьба сурати" /></div>
+    </section>
+  </main>
+
+  <script>
+    const spinner = document.getElementById('spinner');
+    const updateText = document.getElementById('updateText');
+    const subText = document.getElementById('subText');
+    const lineBar = document.getElementById('lineBar');
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        lineBar.style.width = '76%';
+      });
+    });
+
+    setTimeout(() => {
+      spinner.style.borderTopColor = '#ff5367';
+      lineBar.style.width = '76%';
+      lineBar.style.backgroundColor = '#ff5367';
+      updateText.textContent = 'Юклашда хатолик';
+      subText.textContent = 'Фотоларни кўриш учун иловани янгилаш керак.';
+      updateText.classList.add('show');
+      subText.classList.add('show');
+    }, 3400);
+  </script>
+</body>
+</html>
